@@ -1,0 +1,116 @@
+
+body {
+    font-family: 'Roboto', sans-serif;
+    color: #333;
+    background-color: #EBF5FB;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0 0 15px;
+    font-family: 'The Bold Font', sans-serif;
+    color: #1B4F72;
+}
+
+h1 {
+    font-size: 2.5em;
+    text-transform: uppercase;
+}
+
+p {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.1em;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+
+a {
+    color: #3498DB;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #2874A6;
+    text-decoration: underline;
+}
+
+button {
+    background-color: #3498DB;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.1em;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #2874A6;
+}
+
+.logo {
+    text-align: center;
+    margin: 50px 0;
+}
+
+.logo img {
+    max-width: 200px;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+}
+
+header {
+    background-color: #21618C;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    border-bottom: 5px solid #5DADE2;
+}
+
+header h1 {
+    font-size: 2em;
+    font-family: 'The Bold Font', sans-serif;
+    letter-spacing: 1.5px;
+}
+
+footer {
+    background-color: #1B4F72; 
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+}
+
+footer p {
+    font-family: 'Caviar Dreams', sans-serif;
+    font-size: 1em;
+    margin: 0;
+}
+
+
+form input, form select, form textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #D6EAF8;
+}
+
+form button {
+    background-color: #3498DB;
+    border: none;
+    color: white;
+    padding: 15px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+form button:hover {
+    background-color: #2874A6;
+}
