@@ -42,7 +42,7 @@ Parce que notre but est d’être là dans tous les moments clés de votre vie, 
                     </div>
                 </div>
             </div>
-        <?php include_once("footer.php"); ?>
+            <?php include_once("footer.php"); ?>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
