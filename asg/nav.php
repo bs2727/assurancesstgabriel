@@ -22,9 +22,9 @@
 
 <script>
     document.getElementById('loginButton').onclick = function() {
-        window.location.href = 'login.php';
+        window.location.href = 'formlogin.php';
     };
     document.getElementById('registerButton').onclick = function() {
-        window.location.href = 'register.php';
+        window.location.href = 'formregister.php';
     };
 </script>
