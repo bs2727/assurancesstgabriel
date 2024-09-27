@@ -1,1 +1,0 @@
-<div class="container"><p class="m-0 small">Copyright &copy; Assurances Saint Gabriel 2022</p></div>
