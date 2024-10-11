@@ -1,16 +1,6 @@
 <?php
-session_start(); // Démarrage de la session
-
-// Connexion à la base de données
-$host = 'localhost';
-$db = 'assurancessaintgab';
-$user = 'root';
-$pass = '';
-$dsn = "mysql:host=$host;dbname=$db";
-$options = [
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-];
+session_start();    
+include_once("db.php");
 
 try {
     $pdo = new PDO($dsn, $user, $pass, $options);
@@ -32,7 +22,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Le mot de passe est correct, on démarre une session
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['username'] = $user['username'];
-        echo "Connexion réussie. Bonjour, " . $user['username'] . "!";
+        $_SESSION['connecte'] = 'connecte';
+        echo "<script type='text/javascript'>
+        window.location.href = 'index.php';
+      </script>";
     } else {
         echo "Email ou mot de passe incorrect.";
     }

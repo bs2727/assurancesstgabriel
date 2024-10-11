@@ -1,14 +1,6 @@
 <?php
-// Connexion à la base de données
-$host = 'localhost';
-$db = 'assurancessaintgab';
-$user = 'root';
-$pass = '';
-$dsn = "mysql:host=$host;dbname=$db";
-$options = [
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-];
+include_once("db.php");
+session_start();  
 
 try {
     $pdo = new PDO($dsn, $user, $pass, $options);
@@ -31,7 +23,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Insertion dans la base de données
         $stmt = $pdo->prepare('INSERT INTO users (username, email, password) VALUES (?, ?, ?)');
         if ($stmt->execute([$username, $email, $password])) {
-            echo "Inscription réussie.";
+            echo "<script type='text/javascript'>
+            window.location.href = 'index.php';
+          </script>";
         } else {
             echo "Erreur lors de l'inscription.";
         }

@@ -11404,6 +11404,12 @@ p {
 }
 
 .footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  padding: 20px 0;
   background-color: rgba(40, 116, 166, 0.9);
 }
 

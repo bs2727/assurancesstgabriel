@@ -1,3 +1,8 @@
+<?php
+include_once("rolecheck.php"); // Ensure rolecheck.php is included
+
+session_start();
+?>
 <nav class="navbar navbar-expand-lg navbar-dark py-lg-4" id="mainNav">
     <div class="container">
         <a class="navbar-brand text-uppercase fw-bold d-lg-none" href="index.php">St Gabriel</a>
@@ -13,18 +18,28 @@
                 <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="contact.php">Nous contacter</a></li>
             </ul>
             <div class="d-flex">
+                <?php if (!isset($_SESSION["connecte"])) { ?>
                 <button type="button" id="loginButton" class="btn btn-secondary text-white mx-2">Connexion</button>
                 <button type="button" id="registerButton" class="btn btn-secondary text-white mx-2">Inscription</button>
+                <?php } else {?>
+                <button type="button" id="DisconnectButton" class="btn btn-secondary text-white mx-2">Déconnexion</button>
+                <?php } ?>
             </div>
         </div>
     </div>
 </nav>
 
 <script>
-    document.getElementById('loginButton').onclick = function() {
-        window.location.href = 'formlogin.php';
-    };
-    document.getElementById('registerButton').onclick = function() {
-        window.location.href = 'formregister.php';
-    };
+    <?php if (!isset($_SESSION["connecte"])) { ?>
+        document.getElementById('loginButton').onclick = function() {
+            window.location.href = 'formlogin.php';
+        };
+        document.getElementById('registerButton').onclick = function() {
+            window.location.href = 'formregister.php';
+        };
+    <?php } else {?>
+        document.getElementById('DisconnectButton').onclick = function() {
+            window.location.href = 'disconnect.php';
+        };
+    <?php } ?>
 </script>

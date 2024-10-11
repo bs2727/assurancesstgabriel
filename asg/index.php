@@ -4,7 +4,7 @@
     <body>
 		<?php include_once("header.php"); ?>
         <?php include_once("nav.php"); ?>
-<section class="page-section clearfix">
+        <section class="page-section clearfix">
     <div class="container">
         <div class="row">
             <div class="col-lg-6">

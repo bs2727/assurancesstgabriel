@@ -1,6 +1,8 @@
 <?php
 session_start();
 session_destroy(); // Destruction de la session
-header('Location: login.php'); // Redirection vers la page de connexion
-exit;
+echo "<script type='text/javascript'>
+window.location.href = 'index.php';
+</script>";
 ?>
+

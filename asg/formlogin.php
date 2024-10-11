@@ -18,7 +18,7 @@
                 <div class="card-body">
                 <form action="login.php" method="POST">
     <label for="email">Email:</label>
-    <input type="email" name="email" required>
+    <input name="email" required>
 
     <label for="password">Mot de passe:</label>
     <input type="password" name="password" required>
