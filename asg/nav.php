@@ -1,5 +1,5 @@
 <?php
-include_once("rolecheck.php"); // Ensure rolecheck.php is included
+
 
 session_start();
 ?>
@@ -16,6 +16,9 @@ session_start();
                 <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="products.php">Nos contrats</a></li>
                 <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="crew.php">Nos équipes</a></li>
                 <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="contact.php">Nous contacter</a></li>
+                <?php if (isset($_SESSION["connecte"])){  ?>
+                <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="myaccount.php">Mon compte</a></li>
+                <?php }; ?>
             </ul>
             <div class="d-flex">
                 <?php if (!isset($_SESSION["connecte"])) { ?>
