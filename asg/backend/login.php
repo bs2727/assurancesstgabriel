@@ -20,9 +20,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($user && password_verify($password, $user['password'])) {
         // Le mot de passe est correct, on démarre une session
-        $_SESSION['user_id'] = $user['id'];
+        $_SESSION['id'] = $user['id'];
         $_SESSION['username'] = $user['username'];
-        $_SESSION['connecte'] = 'connecte';
+        $_SESSION['email'] = $user['email'];
+        $_SESSION['password'] = $user['password'];
+        $_SESSION['role'] = $user['role'];
+        $_SESSION['loggedin'] = 'loggedin';
+
         echo "<script type='text/javascript'>
         window.location.href = '../section/index.php';
       </script>";

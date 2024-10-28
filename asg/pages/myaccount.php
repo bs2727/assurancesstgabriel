@@ -1,25 +1,28 @@
+<?php include_once ("../backend/functions.php");?>
 <!DOCTYPE html>
 <html lang="en">
-<?php include_once("../includes/head.php"); ?>
+<?php include_once("../includes/head.php"); 
+
+?>
 
 <body>
     <?php include_once("../includes/header.php"); ?>
     <?php include_once("../includes/nav.php"); ?>
 
     <section class="page-section about-heading">
-        <?php if (!isset($_SESSION["connecte"])) { ?>
+        <?php if (isUserLoggedIn()==false) { ?>
 
-            <div class="product-item">
-                <div class="product-item-title d-flex">
-                    <div class="bg-faded p-5 d-flex ms-auto rounded">
-                        <h2 class="section-heading mb-0">
-                            <span class="section-heading-upper">Vous n'êtes pas connecté </span>
-                            <span class="section-heading-lower">Redirection vers la page de connexion</span>
-                        </h2>
-                    </div>
+        <div class="product-item">
+            <div class="product-item-title d-flex">
+                <div class="bg-faded p-5 d-flex ms-auto rounded">
+                    <h2 class="section-heading mb-0">
+                        <span class="section-heading-upper">Vous n'êtes pas connecté </span>
+                        <span class="section-heading-lower">Redirection vers la page de connexion</span>
+                    </h2>
                 </div>
+            </div>
 
-                <?php
+            <?php
                 echo "<script type='text/javascript'>
                             setTimeout(function() {
                                 window.location.href = '../section/index.php';
@@ -27,24 +30,24 @@
                           </script>";
                 ?>
 
-            </div>
+        </div>
 
         <?php } else { ?>
 
-            <section class="page-section cta">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xl-9 mx-auto">
-                            <div class="cta-inner bg-faded text-center rounded">
-                                <h2 class="section-heading mb-4">
-                                    <span class="section-heading-upper">Bonjour <?php echo $_SESSION['username'] ?></span>
-                                    <span class="section-heading-lower">Faire un contract</span>
-                                </h2>
-                            </div>
+        <section class="page-section cta">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-9 mx-auto">
+                        <div class="cta-inner bg-faded text-center rounded">
+                            <h2 class="section-heading mb-4">
+                                <span class="section-heading-upper">Bonjour <?php echo getCurrentUserName() ?></span>
+                                <span class="section-heading-lower"></span>
+                            </h2>
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
         <?php } ?>
     </section>
