@@ -18,12 +18,7 @@
                     </div>
                 </div>
                 <img class="product-item-img mx-auto d-flex rounded img-fluid mb-3 mb-lg-0"
-                    src="assets/img/products-01.jpg" alt="..." />
-                <div class="product-item-description d-flex me-auto">
-                    <div class="bg-faded p-5 rounded">
-                        <p class="mb-0"></p>
-                    </div>
-                </div>
+                    src="../assets/img/products-01.jpg" alt="..." />
             </div>
         </div>
     </section>
@@ -39,7 +34,7 @@
                     </div>
                 </div>
                 <img class="product-item-img mx-auto d-flex rounded img-fluid mb-3 mb-lg-0"
-                    src="assets/img/products-02.jpg" alt="..." />
+                    src="../assets/img/products-02.jpg" alt="..." />
                 <div class="product-item-description d-flex ms-auto">
                     <div class="bg-faded p-5 rounded">
                         <p class="mb-0">Assureur mutualiste de l’économie solidaire, Saint-Gabriel met à la disposition
@@ -62,10 +57,10 @@
                     </div>
                 </div>
                 <img class="product-item-img mx-auto d-flex rounded img-fluid mb-3 mb-lg-0"
-                    src="assets/img/products-03.jpg" alt="..." />
+                    src="../assets/img/products-03.jpg" alt="..." />
                 <div class="product-item-description d-flex me-auto">
                     <div class="bg-faded p-5 rounded">
-                        <p class="mb-0">TForte d’une expertise reconnue découlant de plus de soixante quinze ans
+                        <p class="mb-0">Forte d’une expertise reconnue découlant de plus de soixante quinze ans
                             d’amélioration et d’enrichissement de ses savoir-faire, elle propose à ces institutions, à
                             leurs salariés et à leurs bénévoles des garanties, des services d’assurances et un
                             accompagnement adaptés à leur mission, au meilleur coût.</p>
@@ -74,12 +69,13 @@
             </div>
         </div>
     </section>
-
+    
     <?php include_once("../includes/footer.php"); ?>
+
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
-    <script src="asg/js/scripts.js"></script>
+    <script src="../js/scripts.js"></script>
 </body>
 
 </html>
