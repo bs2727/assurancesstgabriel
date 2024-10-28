@@ -1,6 +1,6 @@
 <?php
-session_start();    
-include_once("db.php");
+session_start();
+include_once("../backend/db.php");
 
 try {
     $pdo = new PDO($dsn, $user, $pass, $options);
@@ -24,12 +24,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['username'] = $user['username'];
         $_SESSION['connecte'] = 'connecte';
         echo "<script type='text/javascript'>
-        window.location.href = 'index.php';
+        window.location.href = '../section/index.php';
       </script>";
     } else {
         echo "Email ou mot de passe incorrect.";
     }
 }
 ?>
-
-

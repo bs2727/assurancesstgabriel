@@ -1,6 +1,6 @@
 <?php
-include_once("db.php");
-session_start();  
+include_once("../backend/db.php");
+session_start();
 
 try {
     $pdo = new PDO($dsn, $user, $pass, $options);
@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt = $pdo->prepare('INSERT INTO users (username, email, password) VALUES (?, ?, ?)');
         if ($stmt->execute([$username, $email, $password])) {
             echo "<script type='text/javascript'>
-            window.location.href = 'index.php';
+            window.location.href = '../section/index.php';
           </script>";
         } else {
             echo "Erreur lors de l'inscription.";

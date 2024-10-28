@@ -1,4 +1,4 @@
-<?php 
+<?php
 // Connexion à la base de données
 $host = 'localhost';
 $db = 'assurancessaintgab';
