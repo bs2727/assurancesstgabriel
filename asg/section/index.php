@@ -10,7 +10,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-6">
-                    <img class="img-fluid mb-3 mb-lg-0 rounded" src="assets/img/intro.jpg" alt="..." />
+                    <img class="img-fluid mb-3 mb-lg-0 rounded" src="../assets/img/intro.jpg" alt="..." />
                 </div>
                 <div class="col-lg-6">
                     <div class="intro-text text-center bg-faded p-5 rounded">
