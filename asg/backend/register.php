@@ -12,6 +12,7 @@ try {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'];
     $email = $_POST['email'];
+    $role = '1';
     $cp = $_POST['cp'];
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // Hash du mot de passe
 
@@ -22,8 +23,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "Cet email est déjà utilisé.";
     } else {
         // Insertion dans la base de données
-        $stmt = $pdo->prepare('INSERT INTO users (username, email, password, cp) VALUES (?, ?, ?, ?)');
-        if ($stmt->execute([$username, $email, $password, $cp])) {
+        $stmt = $pdo->prepare('INSERT INTO users (username, email, password, role, cp) VALUES (?, ?, ?, ?, ?)');
+        if ($stmt->execute([$username, $email, $password, $role, $cp])) {
             echo "<script type='text/javascript'>
             window.location.href = '../pages/index.php';
           </script>";

@@ -32,17 +32,17 @@ function getCurrentUserName()
     return $result['username'] ?? null;
 }
 
-
 function getCurrentUserRole()
 {
     include '../backend/db.php';
-
     $stmt = $pdo->prepare("SELECT role FROM users WHERE email = :email");
     $stmt->bindParam(':email', $_SESSION['email'], PDO::PARAM_STR);
     $stmt->execute();
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    return $result['role'] ?? null;
+    
+    return isset($result['role']) ? $result['role'] : -1;
 }
+
 
 
 function isUserLoggedIn()

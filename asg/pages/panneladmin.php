@@ -13,7 +13,7 @@ $users = getAllUsers();
     <?php include_once("../includes/header.php"); ?>
     <?php include_once("../includes/nav.php"); ?>
 
-    <?php if (getCurrentUserRole() != 3) { ?>
+    <?php if (getCurrentUserRole() != 4) { ?>
         <div class="container my-5">
             <div class="alert alert-warning text-center" role="alert">
                 <h2 class="section-heading mb-3">

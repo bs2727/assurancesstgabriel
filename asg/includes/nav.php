@@ -17,17 +17,17 @@ include_once("../backend/functions.php");
                 <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="../pages/products.php">Nos contrats</a></li>
                 <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="../pages/crew.php">Nos équipes</a></li>
                 <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="../pages/contact.php">Nous contacter</a></li>
-                <?php if (getCurrentUserRole() != 0) { ?>
+                <?php if (getCurrentUserRole() >= 1) { ?>
                     <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="../pages/pannelmyaccount.php">Mon compte</a></li>
                 <?php } ?>
-                <?php if (getCurrentUserRole() == 1) { ?>
+                <?php if (getCurrentUserRole() >= 2) { ?>
                     <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="../pages/contrat.php">Contrat</a></li>
                 <?php } ?>
-                <?php if (getCurrentUserRole() == 2) { ?>
+                <?php if (getCurrentUserRole() >= 3) { ?>
                     <li class="nav-item px-lg-4"><a class="nav-link text-uppercase"
                             href="../pages/pannelnews.php">Gestion actualités</a></li>
                 <?php } ?>
-                <?php if (getCurrentUserRole() == 3) { ?>
+                <?php if (getCurrentUserRole() >= 4) { ?>
                     <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="../pages/panneladmin.php">Gestion</a></li>
                 <?php } ?>
             </ul>

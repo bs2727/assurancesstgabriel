@@ -40,7 +40,26 @@
                         <div class="col-xl-9 mx-auto">
                             <div class="cta-inner bg-faded text-center rounded">
                                 <h2 class="section-heading mb-4">
-                                    <span class="section-heading-upper">Bonjour <?php echo getCurrentUserName() ?></span>
+                                    <span class="section-heading-upper">Bonjour <?php echo getCurrentUserName() ;
+                                    switch (getCurrentUserRole()) {
+                                        case 1:
+                                            echo ' Nouveau client'; 
+                                            break;
+                                        case 2:
+                                            echo ' Déjà client'; 
+                                            break;
+                                        case 3:
+                                            echo ' Collaborateur'; 
+                                            break;
+                                        case 4:
+                                            echo ' Administrateur';
+                                            break;
+                                        default:
+                                            echo ' Rôle inconnu';
+                                            break;
+                                    }
+                                    
+                                    ?></span>
 
                                     <span class="section-heading-lower"></span>
                                 </h2>
