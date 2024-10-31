@@ -11,24 +11,24 @@ include_once("../backend/functions.php");
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mx-auto">
-                <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="../section/index.php">Accueil</a>
+                <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="../pages/index.php">Accueil</a>
                 </li>
-                <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="../section/about.php">Nos activités</a></li>
-                <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="../section/products.php">Nos contrats</a></li>
-                <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="../section/crew.php">Nos équipes</a></li>
-                <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="../section/contact.php">Nous contacter</a></li>
+                <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="../pages/about.php">Nos activités</a></li>
+                <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="../pages/products.php">Nos contrats</a></li>
+                <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="../pages/crew.php">Nos équipes</a></li>
+                <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="../pages/contact.php">Nous contacter</a></li>
                 <?php if (getCurrentUserRole() != 0) { ?>
-                    <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="../pages/myaccount.php">Mon compte</a></li>
+                    <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="../pages/pannelmyaccount.php">Mon compte</a></li>
                 <?php } ?>
                 <?php if (getCurrentUserRole() == 1) { ?>
                     <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="../pages/contrat.php">Contrat</a></li>
                 <?php } ?>
                 <?php if (getCurrentUserRole() == 2) { ?>
                     <li class="nav-item px-lg-4"><a class="nav-link text-uppercase"
-                            href="../pages/pannelcontrat.php">Gestion contrat</a></li>
+                            href="../pages/pannelnews.php">Gestion actualités</a></li>
                 <?php } ?>
                 <?php if (getCurrentUserRole() == 3) { ?>
-                    <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="../pages/adminpannel.php">Gestion</a></li>
+                    <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="../pages/panneladmin.php">Gestion</a></li>
                 <?php } ?>
             </ul>
             <div class="d-flex">

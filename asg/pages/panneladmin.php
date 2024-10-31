@@ -25,7 +25,7 @@ $users = getAllUsers();
             <?php
             echo "<script type='text/javascript'>
                     setTimeout(function() {
-                        window.location.href = '../section/index.php';
+                        window.location.href = '../pages/index.php';
                     }, 5000);
                   </script>";
             ?>
@@ -47,6 +47,7 @@ $users = getAllUsers();
                                                     <th scope="col">Name</th>
                                                     <th scope="col">Email</th>
                                                     <th scope="col">Role</th>
+                                                    <th scope="col">CP</th>
                                                     <th scope="col">Actions</th>
                                                 </tr>
                                             </thead>
@@ -67,6 +68,10 @@ $users = getAllUsers();
                                                             <td contenteditable="true"
                                                                 onblur="updateUser(<?php echo $user['id']; ?>, 'role', this.innerText)">
                                                                 <?php echo htmlspecialchars($user['role']); ?>
+                                                            </td>
+                                                            <td contenteditable="true"
+                                                                onblur="updateUser(<?php echo $user['id']; ?>, 'cp', this.innerText)">
+                                                                <?php echo htmlspecialchars($user['cp']); ?>
                                                             </td>
                                                             <td class="text-center">
                                                                 <button class="btn btn-danger btn-sm"

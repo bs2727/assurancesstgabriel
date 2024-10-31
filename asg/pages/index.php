@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php include_once("../includes/head.php"); ?>
-
+<?php include_once("../includes/head.php");
+include_once("../backend/db.php");
+include_once("../backend/functions.php");
+?>
 <body>
     <?php include_once("../includes/header.php"); ?>
     <?php include_once("../includes/nav.php"); ?>
@@ -23,9 +25,6 @@
                             ceux qui s’engagent : associations, ONG à but humanitaire et caritatif, organismes
                             sanitaires et sociaux, enseignement, institutions
                         </p>
-                        <div class="intro-button mx-auto">
-                            <a class="btn btn-primary btn-xl" href="#!">Il est temps d'adhérer !</a>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -54,6 +53,32 @@
             </div>
         </div>
     </section>
+    <section class="page-section about-heading">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-9 mx-auto">
+                <div class="cta-inner bg-faded text-center rounded">
+                    <h2 class="section-heading mb-4">Dernières Actualités</h2>
+                    <?php
+                    $stmt = $pdo->query("SELECT * FROM news ORDER BY date DESC LIMIT 5");
+                    while ($row = $stmt->fetch()) {
+                        echo "<div class='news-item mb-4'>";
+                        echo "<h3>" . htmlspecialchars($row['title']) . "</h3>";
+                        echo "<p>" . htmlspecialchars($row['date']) . "</p>";
+                        echo "<p>" . htmlspecialchars($row['caption']) . "</p>";
+                        
+                        // Correct the image path to point to 'uploads' folder
+                        $imagePath = "../uploads/" . htmlspecialchars($row['image']);
+                        echo "<img src='" . $imagePath . "' alt='" . htmlspecialchars($row['title']) . "' style='max-width:100%; height:auto;'/>";
+                        echo "</div>";
+                    }
+                    ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 
     <?php include_once("../includes/footer.php"); ?>
 

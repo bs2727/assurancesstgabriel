@@ -25,6 +25,9 @@
                             <label for="password">Mot de passe:</label>
                             <input type="password" name="password" required>
 
+                            <label for="password">Code Postal:</label>
+                            <input type="cp" name="cp" required>
+
                             <button type="submit">S'inscrire</button>
                         </form>
 

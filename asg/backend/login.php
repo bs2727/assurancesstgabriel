@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['loggedin'] = 'loggedin';
 
         echo "<script type='text/javascript'>
-        window.location.href = '../section/index.php';
+        window.location.href = '../pages/index.php';
       </script>";
     } else {
         echo "Email ou mot de passe incorrect.";
