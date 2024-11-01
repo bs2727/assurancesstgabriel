@@ -54,9 +54,9 @@
   --bs-black-rgb: 0, 0, 0;
   --bs-body-rgb: 33, 37, 41;
   --bs-font-sans-serif: "newyork", "roboto", "caviardreams", "theboldfont";
-  --bs-font-monospace: "newyork", "roboto", "caviardreams", "theboldfont";
+  --bs-font-monospace: "caviardreams", "roboto", "newyork", "theboldfont";
   --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
-  --bs-body-font-family: "newyork", "roboto", "caviardreams", "theboldfont";
+  --bs-body-font-family: "caviardreams", "roboto", "newyork", "theboldfont";
   --bs-body-font-size: 1rem;
   --bs-body-font-weight: 400;
   --bs-body-line-height: 1.5;
@@ -12456,22 +12456,25 @@ p {
   font-size: 1.2rem;
 }
 
-@font-face {
-  font-family: "newyork";
-  src: url("assets/font/newyork.otf")
-}
+
 
 @font-face {
   font-family: "roboto";
-  src: url("assets/font/roboto.ttf")
+  src: url("../asg/assets/font/roboto.ttf")
 }
 
 @font-face {
   font-family: "theboldfont";
-  src: url("assets/font/theboldfont.otf")
+  src: url("../assets/font/theboldfont.otf")
 }
 
 @font-face {
-  font-family: "caviardreams";
-  src: url("assets/font/caviardreams.ttf");
+  font-family: 'CaviarDreams', Arial, sans-serif;
+  src: url("../assets/font/caviardreams.ttf");
+}
+
+@font-face {
+  font-family: "newyork";
+  src: url("../assets/font/newyork.otf");
+
 }
