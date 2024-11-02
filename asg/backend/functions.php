@@ -1,216 +1,177 @@
 <?php
 
+// Database Configuration
+$host = 'localhost';
+$db = 'assurancessaintgab';
+$user = 'root'; // Ensure this is a string
+$pass = ''; // Ensure this is a string
+$dsn = "mysql:host=$host;dbname=$db";
+$options = [
+    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+];
 
-// current user
-function getCurrentUserID()
-{
-    include '../backend/db.php';
-    $stmt = $pdo->prepare("SELECT id FROM users WHERE id = :id");
-    $stmt->bindParam(':id', $_SESSION['id'], PDO::PARAM_INT);
-    $stmt->execute();
-    $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    return $result['id'] ?? null;
-}
-
-function getCurrentUserMail()
-{
-    include '../backend/db.php';
-    $stmt = $pdo->prepare("SELECT email FROM users WHERE id = :id");
-    $stmt->bindParam(':id', $_SESSION['id'], PDO::PARAM_INT);
-    $stmt->execute();
-    $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    return $result['email'] ?? null;
-}
-
-function getCurrentUserName()
-{
-    include '../backend/db.php';
-    $stmt = $pdo->prepare("SELECT username FROM users WHERE id = :id");
-    $stmt->bindParam(':id', $_SESSION['id'], PDO::PARAM_INT);
-    $stmt->execute();
-    $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    return $result['username'] ?? null;
-}
-
-function getCurrentUserRole()
-{
-    include '../backend/db.php';
-    $stmt = $pdo->prepare("SELECT role FROM users WHERE email = :email");
-    $stmt->bindParam(':email', $_SESSION['email'], PDO::PARAM_STR);
-    $stmt->execute();
-    $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    
-    return isset($result['role']) ? $result['role'] : -1;
-}
-
-
-
-function isUserLoggedIn()
-{
-    include '../backend/db.php';
-    if (isset($_SESSION['loggedin'])) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
-// Update user's email and password
-function updateUserCredentials($id, $newEmail, $newPassword)
-{
-    include '../backend/db.php';
-
+// Database Connection Function
+function getDatabaseConnection() {
+    global $dsn, $user, $pass, $options;
     try {
-        // Update email and password in the database
-        $stmt = $pdo->prepare("UPDATE users SET email = :email, password = :password WHERE id = :id");
-        $stmt->bindParam(':email', $newEmail);
-        $hashedPassword = password_hash($newPassword, PASSWORD_BCRYPT);
-        $stmt->bindParam(':password', $hashedPassword);
-        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-        $stmt->execute();
-
-        return ['success' => true];
-    } catch (Exception $e) {
-        return ['success' => false, 'message' => $e->getMessage()];
+        return new PDO($dsn, $user, $pass, $options);
+    } catch (PDOException $e) {
+        die("Erreur de connexion : " . $e->getMessage());
     }
 }
 
-// Function to handle JSON input for AJAX calls to update credentials
-function handleUpdateUserCredentialsRequest()
-{
-    $data = json_decode(file_get_contents('php://input'), true);
-    if (isset($data['email'], $data['password'])) {
-        $id = $_SESSION['id'];
-        $newEmail = $data['email'];
-        $newPassword = $data['password'];
 
-        // Call updateUserCredentials to perform the update
-        $response = updateUserCredentials($id, $newEmail, $newPassword);
+// Handle login form submission
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email'], $_POST['password']) && !isset($_POST['register'])) {
+    $email = trim($_POST['email']);
+    $password = $_POST['password'];
 
-        // Return JSON response
-        header('Content-Type: application/json');
-        echo json_encode($response);
-    } else {
-        echo json_encode(['success' => false, 'message' => 'Invalid request data']);
-    }
-}
-
-// Check if this file is accessed directly for an AJAX call to update user credentials
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['action']) && $_GET['action'] === 'updateCredentials') {
-    handleUpdateUserCredentialsRequest();
-}
-
-// all users
-function getAllUsers()
-{
-    include '../backend/db.php';
-
-    // Prepare SQL statement to fetch id, username, email, and role of all users
-    $stmt = $pdo->prepare("SELECT id, username, email, role, cp FROM users");
-    $stmt->execute();
-
-    // Fetch all results as an associative array
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
-
-// Update user field function
-function updateUser($id, $field, $value)
-{
-    include '../backend/db.php';
-
-    // Allow only specific fields to be updated to prevent SQL injection
-    $allowedFields = ['username', 'email', 'role'];
-    if (!in_array($field, $allowedFields)) {
-        return ['success' => false, 'message' => 'Invalid field specified'];
-    }
-
-    try {
-        // Prepare and execute the update query
-        $stmt = $pdo->prepare("UPDATE users SET $field = :value WHERE id = :id");
-        $stmt->bindParam(':value', $value);
-        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-        $stmt->execute();
-
-        return ['success' => true];
-    } catch (Exception $e) {
-        return ['success' => false, 'message' => $e->getMessage()];
-    }
-}
-
-// Function to handle JSON input for AJAX calls
-function handleUpdateUserRequest()
-{
-    $data = json_decode(file_get_contents('php://input'), true);
-    if (isset($data['id'], $data['field'], $data['value'])) {
-        $id = $data['id'];
-        $field = $data['field'];
-        $value = $data['value'];
-
-        // Call updateUser to perform the update
-        $response = updateUser($id, $field, $value);
-
-        // Return JSON response
-        header('Content-Type: application/json');
-        echo json_encode($response);
-    } else {
-        echo json_encode(['success' => false, 'message' => 'Invalid request data']);
-    }
-}
-
-// Check if this file is accessed directly for an AJAX call to update user data
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    handleUpdateUserRequest();
-}
-
-function deleteUser($id)
-{
-    include '../backend/db.php';
-
-    try {
-        // Prepare and execute the delete query
-        $stmt = $pdo->prepare("DELETE FROM users WHERE id = :id");
-        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-        $stmt->execute();
-
-        return ['success' => true];
-    } catch (Exception $e) {
-        return ['success' => false, 'message' => $e->getMessage()];
-    }
-}
-
-// Function to handle JSON input for AJAX delete requests
-function handleDeleteUserRequest()
-{
-    $data = json_decode(file_get_contents('php://input'), true);
-    if (isset($data['id'])) {
-        $id = $data['id'];
-
-        // Call deleteUser to perform the deletion
-        $response = deleteUser($id);
-
-        // Return JSON response
-        header('Content-Type: application/json');
-        echo json_encode($response);
-    } else {
-        echo json_encode(['success' => false, 'message' => 'Invalid request data']);
-    }
-}
-
-// Check if this file is accessed directly for an AJAX call to delete user data
-if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
-    handleDeleteUserRequest();
-}
-
-function createNews($pdo, $date, $title, $caption, $keywords, $image) {
-    $sql = "INSERT INTO news (date, title, caption, keywords, image) VALUES (:date, :title, :caption, :keywords, :image)";
-    $stmt = $pdo->prepare($sql);
-    
-    try {
-        // Validate input data
-        if (empty($date) || empty($title) || empty($caption) || empty($keywords) || empty($image)) {
-            throw new Exception("Invalid request data: All fields are required.");
+    if ($email && $password) {
+        $loginResult = login($email, $password);
+        if (!$loginResult['success']) {
+            $error_message = $loginResult['message'];
         }
-        
+    } else {
+        $error_message = 'Email et mot de passe sont requis.';
+    }
+}
+
+// Handle registration form submission
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['username'], $_POST['email'], $_POST['password'], $_POST['cp'], $_POST['register'])) {
+    $username = trim($_POST['username']);
+    $email = trim($_POST['email']);
+    $password = $_POST['password'];
+    $cp = trim($_POST['cp']);
+
+    if ($username && $email && $password && $cp) {
+        $registerResult = register($username, $email, $password, $cp);
+        if (!$registerResult['success']) {
+            $error_message = $registerResult['message'];
+        }
+    } else {
+        $error_message = 'Tous les champs sont requis.';
+    }
+}
+
+// Login Function
+function login($email, $password) {
+    $pdo = getDatabaseConnection();
+    $stmt = $pdo->prepare('SELECT * FROM users WHERE email = ?');
+    $stmt->execute([$email]);
+    $user = $stmt->fetch();
+
+    if ($user && password_verify($password, $user['password'])) {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+        $_SESSION['id'] = $user['id'];
+        $_SESSION['username'] = $user['username'];
+        $_SESSION['email'] = $user['email'];
+        $_SESSION['role'] = $user['role'];
+        $_SESSION['loggedin'] = true;
+        setcookie('PHPSESSID', session_id(), time() + (86400 * 30), "/", "", false, true);
+
+        // Redirect to the account panel page
+        header('Location: ../pages/pannelmyaccount.php');
+        exit();
+    } else {
+        return ['success' => false, 'message' => 'Email ou mot de passe incorrect.'];
+    }
+}
+
+// Registration Function
+function register($username, $email, $password, $cp) {
+    $pdo = getDatabaseConnection();
+    $role = '1';
+    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+    $stmt = $pdo->prepare('SELECT * FROM users WHERE email = ?');
+    $stmt->execute([$email]);
+    if ($stmt->rowCount() > 0) {
+        return ['success' => false, 'message' => "Cet email est déjà utilisé."];
+    } else {
+        $stmt = $pdo->prepare('INSERT INTO users (username, email, password, role, cp) VALUES (?, ?, ?, ?, ?)');
+        if ($stmt->execute([$username, $email, $hashedPassword, $role, $cp])) {
+            header('Location: ../pages/index.php');
+            exit();
+        } else {
+            return ['success' => false, 'message' => "Erreur lors de l'inscription."];
+        }
+    }
+}
+
+// Function to handle user disconnection
+function disconnect() {
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+    session_unset();
+    session_destroy();
+    header("Location: ../pages/index.php");
+    exit();
+}
+
+// Handle disconnect request directly in functions.php
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'disconnect') {
+    disconnect();
+}
+
+// User Utility Functions
+function getCurrentUserID() {
+    return getCurrentUserInfo('id');
+}
+
+function getCurrentUserMail() {
+    return getCurrentUserInfo('email');
+}
+
+function getCurrentUserName() {
+    return getCurrentUserInfo('username');
+}
+
+function getCurrentUserRole() {
+    return getCurrentUserInfo('role') ?? -1;
+}
+
+function getCurrentUserInfo($field) {
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start(); // Start session if not already started
+    }
+    
+    if (!isset($_SESSION['id'])) {
+        return null; // User is not logged in
+    }
+
+    $pdo = getDatabaseConnection(); // Ensure this returns a valid PDO object
+    $stmt = $pdo->prepare("SELECT $field FROM users WHERE id = :id");
+    $stmt->bindParam(':id', $_SESSION['id'], PDO::PARAM_INT);
+    $stmt->execute();
+    
+    $result = $stmt->fetch();
+    return $result[$field] ?? null; // Return the requested field or null
+}
+
+
+function isUserLoggedIn() {
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+    return isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true;
+}
+
+
+
+// Create News
+function createNews($date, $title, $caption, $keywords, $image) {
+    $pdo = getDatabaseConnection();
+    $stmt = $pdo->prepare("INSERT INTO news (date, title, caption, keywords, image) VALUES (:date, :title, :caption, :keywords, :image)");
+
+    try {
+        if (empty($date) || empty($title) || empty($caption) || empty($keywords) || empty($image)) {
+            throw new Exception("All fields are required.");
+        }
+
         $stmt->execute([
             ':date' => $date,
             ':title' => $title,
@@ -218,47 +179,38 @@ function createNews($pdo, $date, $title, $caption, $keywords, $image) {
             ':keywords' => $keywords,
             ':image' => $image
         ]);
-        echo json_encode(["success" => true, "message" => "Actualité créée avec succès."]);
+
+        echo json_encode(["success" => true, "message" => "News successfully created."]);
     } catch (PDOException $e) {
-        echo json_encode(["success" => false, "message" => "Erreur lors de la création de l'actualité : " . $e->getMessage()]);
+        echo json_encode(["success" => false, "message" => "Error creating news: " . $e->getMessage()]);
     } catch (Exception $e) {
         echo json_encode(["success" => false, "message" => $e->getMessage()]);
     }
 }
 
+// Upload Image Function
 function uploadImage($file) {
-    // Directory where the images will be saved
     $targetDir = realpath(__DIR__ . '/../uploads/') . '/';
-    
-    // Generate a unique name for the file to prevent overwriting
     $fileName = basename($file["name"]);
     $fileExtension = pathinfo($fileName, PATHINFO_EXTENSION);
     $newFileName = uniqid() . '.' . $fileExtension;
     $targetFilePath = $targetDir . $newFileName;
 
-    // Check if the file is an actual image
     $check = getimagesize($file["tmp_name"]);
     if ($check === false) {
         throw new Exception("Le fichier n'est pas une image valide.");
     }
-
-    // Check file size (limit to 5MB)
     if ($file["size"] > 5000000) {
         throw new Exception("Le fichier est trop volumineux (maximum 5MB).");
     }
-
-    // Allow certain file formats
     $allowedExtensions = ["jpg", "jpeg", "png", "gif"];
     if (!in_array(strtolower($fileExtension), $allowedExtensions)) {
         throw new Exception("Seuls les fichiers JPG, JPEG, PNG et GIF sont autorisés.");
     }
-
-    // Attempt to move the uploaded file to the target directory
     if (!move_uploaded_file($file["tmp_name"], $targetFilePath)) {
         throw new Exception("Erreur lors du téléchargement de l'image.");
     }
-
-    // Return the new file name to be saved in the database
     return $newFileName;
 }
+
 ?>
