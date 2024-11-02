@@ -1,6 +1,6 @@
 <?php
-session_start();
-include_once("../backend/functions.php");
+// Include necessary functions
+require_once "../backend/functions.php";
 ?>
 <nav class="navbar navbar-expand-lg navbar-dark py-lg-4" id="mainNav">
     <div class="container">
@@ -11,50 +11,41 @@ include_once("../backend/functions.php");
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mx-auto">
-                <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="../pages/index.php">Accueil</a>
-                </li>
+                <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="../pages/index.php">Accueil</a></li>
                 <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="../pages/about.php">Nos activités</a></li>
                 <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="../pages/products.php">Nos contrats</a></li>
                 <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="../pages/crew.php">Nos équipes</a></li>
                 <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="../pages/contact.php">Nous contacter</a></li>
-                <?php if (getCurrentUserRole() >= 1) { ?>
+                <?php if (getCurrentUserRole() == 1 || getCurrentUserRole() == 2): ?> 
                     <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="../pages/pannelmyaccount.php">Mon compte</a></li>
-                <?php } ?>
-                <?php if (getCurrentUserRole() >= 2) { ?>
-                    <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="../pages/contrat.php">Contrat</a></li>
-                <?php } ?>
-                <?php if (getCurrentUserRole() >= 3) { ?>
-                    <li class="nav-item px-lg-4"><a class="nav-link text-uppercase"
-                            href="../pages/pannelnews.php">Gestion actualités</a></li>
-                <?php } ?>
-                <?php if (getCurrentUserRole() >= 4) { ?>
-                    <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="../pages/panneladmin.php">Gestion</a></li>
-                <?php } ?>
+                    <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="../pages/pannelcontrat.php">Contrats</a></li>
+                <?php endif; ?>
+                <?php if (getCurrentUserRole() >= 4): ?> 
+                    <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="../gestion/gestion.php">Gestion</a></li>
+                <?php endif; ?>
             </ul>
             <div class="d-flex">
-                <?php if (!isUserLoggedIn()) { ?>
+                <?php if (!isUserLoggedIn()): ?>
                     <button type="button" id="loginButton" class="btn btn-secondary text-white mx-2">Connexion</button>
                     <button type="button" id="registerButton" class="btn btn-secondary text-white mx-2">Inscription</button>
-                <?php } else { ?>
-                    <button type="button" id="DisconnectButton"
-                        class="btn btn-secondary text-white mx-2">Déconnexion</button>
-                <?php } ?>
+                <?php else: ?>
+                    <form method="post" style="display: inline;">
+                        <input type="hidden" name="action" value="disconnect">
+                        <button type="submit" id="DisconnectButton" class="btn btn-secondary text-white mx-2">Déconnexion</button>
+                    </form>
+                <?php endif; ?>
             </div>
         </div>
     </div>
 </nav>
 
 <script>
-    <?php if (!isset($_SESSION["loggedin"])) { ?>
+    <?php if (!isUserLoggedIn()): ?>
         document.getElementById('loginButton').onclick = function () {
             window.location.href = '../pages/formlogin.php';
         };
         document.getElementById('registerButton').onclick = function () {
             window.location.href = '../pages/formregister.php';
         };
-    <?php } else { ?>
-        document.getElementById('DisconnectButton').onclick = function () {
-            window.location.href = '../backend/disconnect.php';
-        };
-    <?php } ?>
+    <?php endif; ?>
 </script>
