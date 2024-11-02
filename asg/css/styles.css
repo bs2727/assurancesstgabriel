@@ -12460,7 +12460,7 @@ p {
 
 @font-face {
   font-family: "roboto";
-  src: url("../asg/assets/font/roboto.ttf")
+  src: url("../assets/font/roboto.ttf")
 }
 
 @font-face {
@@ -12469,8 +12469,8 @@ p {
 }
 
 @font-face {
-  font-family: 'CaviarDreams', Arial, sans-serif;
-  src: url("../assets/font/caviardreams.ttf");
+  font-family: 'CaviarDreams';
+  src: url("../assets/font/CaviarDreams.ttf");
 }
 
 @font-face {
