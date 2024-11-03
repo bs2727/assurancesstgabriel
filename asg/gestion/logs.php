@@ -38,7 +38,7 @@ $allUsers = getAllUsers();
     <div class="container mt-5">
         <div class="card shadow-sm">
             <div class="card-header">
-                <h2>Bonjour Administrateur,</h2>
+                <h2>Bonjour,</h2>
                 <p class="mb-0">Bienvenue sur la gestion des logs de votre espace administrateur.</p>
             </div>
             <div class="card-body">
