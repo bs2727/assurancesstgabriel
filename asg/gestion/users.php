@@ -160,10 +160,6 @@ $users = getAllUsers();
             <p>Aucun utilisateur trouvé.</p>
         <?php endif; ?>
     </div>
-
     <?php require_once "../includes/footer.php"; ?>
-
-    <!-- Inclure Bootstrap JS et dépendances -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

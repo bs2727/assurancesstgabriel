@@ -29,10 +29,6 @@ require_once "../includes/head.php";
     require_once "../includes/footer.php"; 
     ?>
 
-    <!-- Bootstrap core JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Core theme JS -->
-    <script src="asg/js/scripts.js"></script>
 </body>
 
 </html>

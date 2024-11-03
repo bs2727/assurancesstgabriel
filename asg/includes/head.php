@@ -5,6 +5,10 @@
 <title>Assurances Saint Gabriel</title>
 <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
 
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.0/font/bootstrap-icons.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/
+@5.1.0/dist/css/bootstrap.min.css">
 <!-- Font Awesome icons (free version) -->
 <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
 
