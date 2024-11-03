@@ -16,7 +16,7 @@ require_once "../backend/functions.php";
 
 // Vérifier si l'utilisateur est connecté et est administrateur
 if (!isUserLoggedIn() || getCurrentUserRole() < 4) {
-    header('Location: ../pages/login.php');
+    include_once("../backend/redirect.php");
     exit();
 }
 

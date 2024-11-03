@@ -6,7 +6,7 @@
         <?php require_once "../includes/nav.php"; ?>
         <script>
         setTimeout(function() {
-        window.location.href = '../pages/formlogin.php';
+        window.location.href = '../backend/redirect.php';
           }, 5000);
         </script>
         <div class="container my-5">

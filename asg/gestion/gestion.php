@@ -9,9 +9,8 @@ if (session_status() === PHP_SESSION_NONE) {
 // Inclure les fonctions backend
 require_once "../backend/functions.php";
 
-// Vérifier si l'utilisateur est connecté
-if (!isUserLoggedIn()) {
-    header('Location: ../pages/login.php');
+if (!isUserLoggedIn() || getCurrentUserRole() < 4) {
+    include_once("../backend/redirect.php");
     exit();
 }
 
