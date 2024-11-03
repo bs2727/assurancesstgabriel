@@ -13,7 +13,6 @@
 - [10. Gestion des Utilisateurs](#gestion-des-utilisateurs)
 - [11. Journalisation](#journalisation-logactionuserid-action)
 - [12. Fonctions Administratives](#fonctions-administratives)
-- [Nouvelles Fonctions Qui Pourraient Être Utiles](#nouvelles-fonctions-qui-pourraient-être-utiles)
 - [Documentation de la Base de Données](#documentation-de-la-base-de-données-assurancessaintgabsql)
 
 ---
@@ -106,29 +105,6 @@ Cette fonction journalise les actions effectuées par les utilisateurs.
 - ***getAllSimulations()*** : Récupère toutes les simulations (utilisation admin).
 - ***getAllContracts()*** : Récupère tous les contrats (utilisation admin).
 - ***getLogs($userId = null, $startDate = null, $endDate = null)*** : Récupère les journaux d'activités des utilisateurs filtrés par ID utilisateur ou date.
-
-## Nouvelles Fonctions Qui Pourraient Être Utiles
-1. ***deleteUser($userId)*** : Supprime un utilisateur par son ID.
-   - **Paramètres** : *$userId*.
-   - **Logs** : Enregistre la suppression d'un utilisateur.
-
-2. ***archiveContract($contractId)*** : Archive un contrat au lieu de le supprimer définitivement.
-   - **Paramètres** : *$contractId*.
-   - **Logs** : Enregistre l'archivage d'un contrat.
-
-3. ***sendEmailNotification($email, $subject, $message)*** : Envoie une notification par e-mail à un utilisateur.
-   - **Paramètres** : *$email*, *$subject*, *$message*.
-
-4. ***resetUserPassword($email)*** : Génère un lien de réinitialisation de mot de passe et l'envoie à l'utilisateur.
-   - **Paramètres** : *$email*.
-   - **Logs** : Enregistre la demande de réinitialisation de mot de passe.
-
-5. ***getActiveUsers()*** : Récupère une liste des utilisateurs actuellement actifs.
-   - **Retourne** : Tableau des utilisateurs connectés.
-
-6. ***deleteNews($newsId)*** : Supprime une entrée d'actualité par son ID.
-   - **Paramètres** : *$newsId*.
-   - **Logs** : Enregistre la suppression de l'entrée d'actualité.
 
 ## Documentation de la Base de Données (*assurancessaintgab.sql*) {#documentation-de-la-base-de-données-assurancessaintgab.sql}
 La base de données *assurancessaintgab* contient plusieurs tables utilisées pour gérer les utilisateurs, les simulations, les contrats, les actualités et la journalisation des actions. Voici une description de chaque table et de son rôle :
