@@ -1,70 +1,77 @@
 <?php
-include '../backend/functions.php'; // Include backend functions
+// ../compte/moncompte.php
 
+// Démarrer la session si elle n'est pas déjà démarrée
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-if (getCurrentUserRole() < 4) {
-    include_once("../backend/redirect.php");
-    exit(); // Ensure script execution stops after redirect
+// Inclure les fonctions backend
+require_once "../backend/functions.php";
+
+// Vérifier si l'utilisateur est connecté
+if (!isUserLoggedIn()) {
+    header('Location: ../pages/login.php');
+    exit();
 }
+
+// Récupérer les informations de l'utilisateur
+$firstName = getCurrentUserFname();
+$userRole = getCurrentUserRole();
 ?>
-
 <!DOCTYPE html>
-<html lang="en">
-<?php require_once "../includes/head.php"; ?>
-
+<html lang="fr">
+<head>
+    <?php require_once "../includes/head.php"; ?>
 <body>
-    <?php require_once "../includes/header.php"; ?>
-    <?php require_once "../includes/nav.php"; ?>
+    <?php
+    require_once "../includes/header.php";
+    require_once "../includes/nav.php";
+    ?>
 
     <div class="container mt-5">
-        <div class="row justify-content-center">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h2>Bonjour <?php echo htmlspecialchars($firstName); ?>,</h2>
+            </div>
+            <div class="card-body">
+                    <h2>Bienvenue sur votre espace</h2>
+                <div class="row mt-4">
             <div class="col-md-4 text-center">
-                <?php if (getCurrentUserRole() >= 4): ?>
-                    <a href="news.php" class="icon btn btn-primary d-flex flex-column align-items-center">
-                        <img src="../assets/img/gestion/news.png" alt="News" class="mb-2" style="width: 100px; height: 100px;">
-                        <div class="icon-name">Actualités</div>
-                    </a>
-                <?php else: ?>
-                    <span class="icon btn btn-secondary d-flex flex-column align-items-center disabled">
-                        <img src="../assets/img/gestion/news.png" alt="News" class="mb-2" style="width: 100px; height: 100px;">
-                        <div class="icon-name">Actualités</div>
-                    </span>
-                <?php endif; ?>
+                <a href="news.php" class="btn btn-outline-primary btn-lg w-100 mb-3">
+                    <i class="bi bi-newspaper" style="font-size: 2rem;"></i><br>
+                    Actualités
+                </a>
             </div>
 
             <div class="col-md-4 text-center">
-                <?php if (getCurrentUserRole() >= 4): ?>
-                    <a href="contracts.php" class="icon btn btn-primary d-flex flex-column align-items-center">
-                        <img src="../assets/img/gestion/contract.png" alt="Contract" class="mb-2" style="width: 100px; height: 100px;">
-                        <div class="icon-name">Contrat</div>
-                    </a>
-                <?php else: ?>
-                    <span class="icon btn btn-secondary d-flex flex-column align-items-center disabled">
-                        <img src="../assets/img/gestion/contract.png" alt="Contract" class="mb-2" style="width: 100px; height: 100px;">
-                        <div class="icon-name">Contrats</div>
-                    </span>
-                <?php endif; ?>
+                <a href="contracts.php" class="btn btn-outline-success btn-lg w-100 mb-3">
+                <i class="bi bi-gear-fill" style="font-size: 2rem;"></i><br>
+                    Contrats
+                </a>
             </div>
 
             <div class="col-md-4 text-center">
-                <?php if (getCurrentUserRole() >= 4): ?>
-                    <a href="users.php" class="icon btn btn-primary d-flex flex-column align-items-center">
-                        <img src="../assets/img/gestion/users.png" alt="Users" class="mb-2" style="width: 100px; height: 100px;">
-                        <div class="icon-name">Utilisateurs</div> 
-                    </a>
-                <?php else: ?>
-                    <span class="icon btn btn-secondary d-flex flex-column align-items-center disabled">
-                        <img src="../assets/img/gestion/users.png" alt="Users" class="mb-2" style="width: 100px; height: 100px;">
-                        <div class="icon-name">Utilisateurs</div>
-                    </span>
-                <?php endif; ?>
+                <a href="users.php" class="btn btn-outline-warning btn-lg w-100 mb-3">
+                    <i class="bi bi-people-fill" style="font-size: 2rem;"></i><br>
+                    Utilisateurs
+                </a>
+            </div>
+
+            <div class="col-md-4 text-center">
+                <a href="logs.php" class="btn btn-outline-info btn-lg w-100 mb-3">
+                <i class="bi bi-eyeglasses" style="font-size: 2rem;"></i><br>
+                    Logs
+                </a>
+            </div>
+                </div>
             </div>
         </div>
     </div>
 
     <?php require_once "../includes/footer.php"; ?>
+
+    <!-- JS Bootstrap et icônes -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

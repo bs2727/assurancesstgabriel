@@ -12368,14 +12368,16 @@ p {
 }
 
 .footer {
-  position: fixed;
+  position: relative; /* Change to relative so it only stays at the bottom when necessary */
   bottom: 0;
   left: 0;
   width: 100%;
   text-align: center;
   padding: 20px 0;
   background-color: rgba(40, 116, 166, 0.9);
+  margin-top: auto; /* Allow it to push down if content is less */
 }
+
 
 .intro {
   position: relative;
