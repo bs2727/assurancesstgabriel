@@ -27,8 +27,6 @@ $logs = getLogs($userFilter, $startDate, $endDate);
 // Récupérer tous les utilisateurs pour les filtres
 $allUsers = getAllUsers();
 ?>
-<!DOCTYPE html>
-<html lang="fr">
 <head>
     <?php require_once "../includes/head.php"; ?>
 <body>

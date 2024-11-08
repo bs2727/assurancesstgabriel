@@ -18,8 +18,6 @@ if (!isUserLoggedIn() || getCurrentUserRole() < 4) {
 $firstName = getCurrentUserFname();
 $userRole = getCurrentUserRole();
 ?>
-<!DOCTYPE html>
-<html lang="fr">
 <head>
     <?php require_once "../includes/head.php"; ?>
 <body>

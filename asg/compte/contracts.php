@@ -23,8 +23,6 @@ if (!isUserLoggedIn()) {
 // Récupérer les contrats de l'utilisateur
 $contrats = getUserContracts(getCurrentUserID());
 ?>
-<!DOCTYPE html>
-<html lang="fr">
     <?php require_once "../includes/head.php"; ?>
 <body>
     <?php require_once "../includes/header.php"; ?>

@@ -16,7 +16,7 @@ require_once "../backend/functions.php";
                 <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="../pages/products.php">Nos contrats</a></li>
                 <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="../pages/crew.php">Nos équipes</a></li>
                 <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="../pages/contact.php">Nous contacter</a></li>
-                <?php if (getCurrentUserRole() == 1 || getCurrentUserRole() == 2): ?> 
+                <?php if (isUserLoggedIn()): ?> 
                     <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="../compte/moncompte.php">Mon compte</a></li>
                 <?php endif; ?>
                 <?php if (getCurrentUserRole() >= 4): ?> 

@@ -1,0 +1,74 @@
+# ------------------------------------------------------------------
+# 1. Activer le moteur de réécriture
+# ------------------------------------------------------------------
+# RewriteEngine On
+
+# ------------------------------------------------------------------
+# 2. Rediriger HTTP vers HTTPS
+# ------------------------------------------------------------------
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# ------------------------------------------------------------------
+# 3. Désactiver l'énumération des répertoires
+# ------------------------------------------------------------------
+# Options -Indexes
+
+# ------------------------------------------------------------------
+# 4. Protéger l'accès aux répertoires sensibles (backend/ et includes/)
+# ------------------------------------------------------------------
+# RewriteRule ^(backend|includes)/ - [F,L]
+
+# ------------------------------------------------------------------
+# 5. Protéger le fichier .htaccess lui-même
+# ------------------------------------------------------------------
+# <Files ".htaccess">
+#     Require all denied
+# </Files>
+
+# ------------------------------------------------------------------
+# 6. Empêcher l'exécution de scripts dans le dossier uploads/
+# ------------------------------------------------------------------
+# <Directory "uploads">
+#     <FilesMatch "\.(php|php5|php7|phtml|pl|py|jsp|asp|sh|cgi)$">
+#         Require all denied
+#     </FilesMatch>
+# </Directory>
+
+# ------------------------------------------------------------------
+# 7. Ajouter des en-têtes de sécurité
+# ------------------------------------------------------------------
+# <IfModule mod_headers.c>
+#     # Empêcher le sniffing MIME
+#     Header set X-Content-Type-Options "nosniff"
+    
+#     # Activer le mode strict de transport sécurisé
+#     Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+    
+#     # Empêcher l'affichage dans les frames (clickjacking)
+#     Header always append X-Frame-Options SAMEORIGIN
+    
+#     # Activer le contrôle du contenu pour prévenir les attaques XSS et autres
+#     Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:;"
+    
+#     # Activer la protection contre les attaques XSS
+#     Header set X-XSS-Protection "1; mode=block"
+# </IfModule>
+
+# ------------------------------------------------------------------
+# 8. Personnaliser les pages d'erreur
+# ------------------------------------------------------------------
+# ErrorDocument 400 /pages/errors/400.php
+# ErrorDocument 401 /pages/errors/401.php
+# ErrorDocument 403 /pages/errors/403.php
+# ErrorDocument 404 /pages/errors/404.php
+# ErrorDocument 500 /pages/errors/500.php
+
+# ------------------------------------------------------------------
+# 9. Forcer le téléchargement de certains types de fichiers (Facultatif)
+# ------------------------------------------------------------------
+# Exemple : forcer le téléchargement des fichiers .pdf
+# <FilesMatch "\.(?i:pdf)$">
+#     ForceType application/octet-stream
+#     Header set Content-Disposition attachment
+# </FilesMatch>

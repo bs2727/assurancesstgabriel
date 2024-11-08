@@ -37,8 +37,7 @@ if (!$contrat || $contrat['user_id'] != getCurrentUserID()) {
     exit();
 }
 ?>
-<!DOCTYPE html>
-<html lang="fr">
+
     <?php require_once "../includes/head.php"; ?>
 <body>
     <?php require_once "../includes/header.php"; ?>

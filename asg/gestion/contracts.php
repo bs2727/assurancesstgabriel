@@ -50,8 +50,6 @@ $simulationsRepondues = getSimulationsByStatus('Répondu');
 // Récupérer tous les contrats
 $contrats = getAllContracts();
 ?>
-<!DOCTYPE html>
-<html lang="fr">
 <head>
     <?php require_once "../includes/head.php"; ?>
 <body>
@@ -120,8 +118,8 @@ $contrats = getAllContracts();
                                     <td>
                                         <!-- Formulaire pour répondre à la simulation -->
                                         <form method="POST" action="">
-                                            <input type="hidden" name="action" value="respond_simulation">
-                                            <input type="hidden" name="simulation_id" value="<?php echo htmlspecialchars($simulation['id']); ?>">
+                                            <input type="hidden" name="action" value="respond_simulation" name="csrf_token" value="<?php echo htmlspecialchars($csrf_token); ?>">
+                                            <input type="hidden" name="simulation_id" name="csrf_token" value="<?php echo htmlspecialchars($simulation['id']); echo htmlspecialchars($csrf_token); ?>">
                                             <div class="mb-3">
                                                 <label for="reponse_<?php echo htmlspecialchars($simulation['id']); ?>" class="form-label">Réponse</label>
                                                 <textarea class="form-control" id="reponse_<?php echo htmlspecialchars($simulation['id']); ?>" name="reponse" rows="3" required></textarea>
@@ -169,13 +167,13 @@ $contrats = getAllContracts();
                                     <td>
                                         <?php if ($simulation['statut'] == 'Répondu'): ?>
                                             <form method="POST" action="" style="display:inline-block;">
-                                                <input type="hidden" name="action" value="accept_simulation">
-                                                <input type="hidden" name="simulation_id" value="<?php echo htmlspecialchars($simulation['id']); ?>">
+                                                <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($csrf_token); ?>" name="action" value="accept_simulation">
+                                                <input type="hidden" name="simulation_id" name="csrf_token" value="<?php echo htmlspecialchars($simulation['id']); htmlspecialchars($csrf_token) ?> ">
                                                 <button type="submit" class="btn btn-success btn-sm">Accepter</button>
                                             </form>
                                             <form method="POST" action="" style="display:inline-block;">
-                                                <input type="hidden" name="action" value="decline_simulation">
-                                                <input type="hidden" name="simulation_id" value="<?php echo htmlspecialchars($simulation['id']); ?>">
+                                                <input type="hidden" name="action" name="csrf_token" value="decline_simulation" value="<?php echo htmlspecialchars($csrf_token); ?>">
+                                                <input type="hidden" name="simulation_id" name="csrf_token" value="<?php echo htmlspecialchars($simulation['id']); echo htmlspecialchars($csrf_token); ?>">
                                                 <button type="submit" class="btn btn-danger btn-sm">Refuser</button>
                                             </form>
                                         <?php else: ?>

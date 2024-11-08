@@ -7,8 +7,6 @@ if (session_status() === PHP_SESSION_NONE) {
 // Include necessary functions
 require_once "../backend/functions.php";
 ?>
-<!DOCTYPE html>
-<html lang="en">
 
 <?php 
 // Include head section

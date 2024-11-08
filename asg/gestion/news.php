@@ -9,8 +9,6 @@ require_once "../backend/functions.php";
 if (getCurrentUserRole() < 3)
     include_once("../backend/redirect.php");
 ?>
-<!DOCTYPE html>
-<html lang="en">
 
 <?php 
 // Include head section

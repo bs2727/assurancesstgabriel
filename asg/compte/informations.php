@@ -48,8 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_info'])) {
     }
 }
 ?>
-<!DOCTYPE html>
-<html lang="fr">
+
 <head>
     <?php require_once "../includes/head.php"; ?>
     <title>Mes Informations</title>
@@ -74,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_info'])) {
                 <?php endif; ?>
 
                 <form action="" method="post" class="mt-4">
-                    <input type="hidden" name="update_info" value="1">
+                    <input type="hidden" name="update_info" value="1" name="csrf_token" value="<?php echo htmlspecialchars($csrf_token); ?>">>
 
                     <div class="mb-3">
                         <label for="first_name" class="form-label">Prénom</label>

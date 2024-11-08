@@ -48,8 +48,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
 // Récupérer tous les utilisateurs
 $users = getAllUsers();
 ?>
-<!DOCTYPE html>
-<html lang="fr">
 <?php require_once "../includes/head.php"; ?>
 <body>
     <?php require_once "../includes/header.php"; ?>
@@ -113,8 +111,8 @@ $users = getAllUsers();
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
                                           </div>
                                           <div class="modal-body">
-                                              <input type="hidden" name="action" value="update_user">
-                                              <input type="hidden" name="user_id" value="<?php echo htmlspecialchars($user['id']); ?>">
+                                              <input type="hidden" name="action" value="update_user" name="csrf_token" value="<?php echo htmlspecialchars($csrf_token); ?>">
+                                              <input type="hidden" name="user_id" name="csrf_token" value="<?php echo htmlspecialchars($user['id']); echo htmlspecialchars($csrf_token); ?>">
                                               
                                               <div class="mb-3">
                                                   <label for="first_name_<?php echo htmlspecialchars($user['id']); ?>" class="form-label">Prénom</label>
